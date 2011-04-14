@@ -1,6 +1,6 @@
 $Id: zshrc 88 2010-06-15 13:20:22 emory $
 
-export WWW_HOME="http://www.google.com/"
+export WWW_HOME="https://encrypted.google.com/"
 
 # Search path for the cd command
 cdpath=(. .. ~ ~/Sources ~/bin ~/Applications ~/Dropbox ~/Documents ~/Projects)
@@ -34,7 +34,6 @@ opath=( )
 spath=( /sbin /usr/sbin )
 xpath=( /usr/X11R6/bin )
 zpath=( )
-#manpath=( /usr/share/man:/usr/man:/usr/local/man:/opt/man:/opt/gnu/man:/usr/share/catman )
 
 
 #*--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--*#
@@ -90,7 +89,7 @@ elif [[ ${OS_TYPE} == "Linux" ]]; then
    sys  () { $SYSLOG /var/adm/syslog }
 
 elif [[ ${OS_TYPE} == "BSD/OS" ]]; then 
-   # Proto BSD Box
+   # Proto bsdi Box
    cpath=( /bin /usr/{bin,contrib/bin} )
    spath=( /sbin /usr/{sbin,libexec} )
    xpath=( /usr/X11/bin )
@@ -151,7 +150,7 @@ elif [[ ${OS_TYPE} == "FreeBSD" ]]; then
 
 elif [[ ${OS_TYPE} == "HP-UX" ]]; then
 
-   # Proto HP-UX Box (Ugh)
+   # Proto HP/UX Box (Ugh)
 
    MAJOR_OS_REV=`uname -r | sed -e 's/^[^\.]*\.//' -e 's/\..*$//'`
    cpath=( /bin /usr/{bin,contrib/bin} /opt/{ansic/bin,langtools/bin} )
@@ -297,26 +296,7 @@ promptinit
         PR_STITLE=''
     fi
     
-    
-    ###
-    # APM detection
-    
-    ##if which ibam > /dev/null; then
-        #PR_APM='$PR_RED${${PR_APM_RESULT[(f)1]}[(w)-2]}%%(${${PR_APM_RESULT[(f)3]}[(w)-1]})$PR_LIGHT_BLUE:'
-    #elif which apm > /dev/null; then
-        #PR_APM='$PR_RED${PR_APM_RESULT[(w)5,(w)6]/\% /%%}$PR_LIGHT_BLUE:'
-    #else
-        #PR_APM=''
-    #fi
-    
-    
-    ###
-    # Finally, the prompt.
-
-
-# WHUT prompt
-
-# prompt (if running screen, show window #)
+# prompt (if running tmux or screen, show window #)
 if [ x$WINDOW != x ]; then
     export PS1="$WINDOW:%~%# "
 else
@@ -396,7 +376,7 @@ compctl -e disable
 compctl -d enable
 
 #*----+----+----+----+
-#	host completions
+# host completions
 #*----+----|----+----+
 # this is very complex and ruley.
 # you can have it complete hostnames for you, but like.  i don't mess
@@ -412,12 +392,15 @@ compctl -d enable
 #      hosts=($hosts `cat $moo`)
 #   end
 #}
-   setopt NULL_GLOB
-   hosts=""
-   foreach moo ( ~/.hosts-* )
-      hosts=($hosts `cat $moo`)
-   end
-   unsetopt NULL_GLOB
+
+setopt NULL_GLOB
+hosts=""
+foreach moo ( ~/.hosts-* )
+hosts=($hosts `cat $moo`)
+end
+unsetopt NULL_GLOB
+
+# oh boy
    compctl -l '' nohup noglob exec nice eval - time rusage
    compctl -l '' -x 'p[1]' -eB -- builtin
    compctl -l '' -x 'p[1]' -em -- command
@@ -452,7 +435,6 @@ compctl -d enable
       'p[1] W[2,*:*]' -f - 'p[1] W[2,*?*]' -u -k hosts -S ':' - \
       'p[2] W[1,*:*]' -f - 'p[2] W[1,*?*]' -u -k hosts -S ':' -- scp
 
-   #compctl -g '*.[^oa]' vi vile
    compctl -f -x 'p[1] n[-1,.], p[2] C[-1,-*] n[-1,.]' -k groups - \
       'p[1], p[2] C[-1,-*]' -u -S '.' -q -- chown
    #compctl -f -x 's[--]' -k '(changes silent quiet verbose recursive help \
@@ -528,6 +510,7 @@ compctl -d enable
       #'c[-1,-cursor_name]' -K Xcursor - \
       #'C[-1,-(solid|fg|bg)]' -K Xcolours -- xsetroot
 
+#  # super bad-ass 
 #  # talk completion: complete local users, or users at hosts listed via rwho
 #   compctl -K talkmatch talk ytalk ytalk3 ntalk
 #   function talkmatch {
@@ -594,10 +577,10 @@ alias pu=pushd
 alias po=popd
 alias d='dirs -v'
 alias h=history
-#alias la='ls -Fa'
-#alias lsd='ls -ld *(-/DN)'
-#alias lsa='ls -ld .*'
-#alias lf='ls -Flags'
+alias la='ls -Fa'
+alias lsd='ls -ld *(-/DN)'
+alias lsa='ls -ld .*'
+alias lf='ls -Flags'
 alias -g M='|more'
 alias -g H='|head'
 alias -g T='|tail'
@@ -637,14 +620,14 @@ ensnfile1 ()     { enscript -G -b"$USER@$HOST ($PRINTNAME)" -p/tmp/$*.ps $* }
 #uncrypt ()       { pgp $*;rm -i $* }
 dir ()           { ls -al $* |more }
 #ll ()            { command ls -la $* | more }
-#ff ()            { find . -name $* -print }
-#ffgrep ()        { find . -type f -exec grep '$*' '{}' /dev/null \; }
+ff ()            { find . -name $* -print }
+ffgrep ()        { find . -type f -exec grep '$*' '{}' /dev/null \; }
 #gref ()          { find . -type f -print | xargs grep '$*' }
 #ffind ()         { find . -type f -exec grep -l '$*' '{}' \; }
 #ftest ()         { echo "find . -type f -exec grep -l '$*' '{}' \;" }
 setenv ()        { export $1=$2 }					# to jive with csh
-#hog ()           { du -ks $*|sort -nr|pg }
-#hogclean ()      { ls -ls|sort -nr|pg }
+hog ()           { du -ks $*|sort -nr }
+hogclean ()      { ls -ls|sort -nr }
 #mk ()            { tar cvf /data/src/aol/$*.tar $* }
 lower ()         { tr -s '[:upper:]' '[:lower:]' }
 count ()         { awk 'BEGIN { if ("'$#argv'"==1) Col="'$1'"; else Col=1 } {Tot\
@@ -661,23 +644,27 @@ undos ()         { sed 's//g' $* > $*.clean }
 
 case $host in
    (*.hellyeah.com)
-      watch=( douglas:chris:mike:annette:bryan:ben:pong:jyee:orange:hagbard:jpatrick:ace:andy:aikido )
+      watch=(notme)
    ;&
+
+   (*.uiowa.edu)
+   ;&
+
    (*.aol.com )
       watch=(notme)
    ;&
+
    (dns*)
       export TITLE="$host"
       title
    ;&
+
    (*.cais.net)
       watch=(notme)
    ;&
+
    (swank.office.aol.com)
       mailpath="/var/mail/$USERNAME:$HOME/mail?You have new mail in $_"
-   ;&
-   (news.inet.net)
-      zpath=( /usr/local/news/bin )
    ;&
 esac
 

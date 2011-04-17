@@ -273,7 +273,7 @@ autoload promptinit
 promptinit
 
 # Emory says: "this svelte prompt is bottomless"
-PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %F{red}%}%2~%b %B·%b '
+PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %2~ %F{yellow}%#%b '
 
 # Decide if we need to set titlebar text.
     

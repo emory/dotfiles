@@ -333,6 +333,8 @@ function preexec() {
   title "$1" "$USER@%m" "%35<...<%~"
 }
 
+PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %2~ %F{yellow}%#%b '
+
 # Watch for my friends
 # Set below
 #watch=($(cat ~/.friends))      # watch for people in .friends file

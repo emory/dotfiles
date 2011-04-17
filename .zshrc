@@ -272,9 +272,6 @@ hosts=(`hostname` autobahn sobchak itsecurity3 itsecurity12 shudder shake idscon
 autoload promptinit
 promptinit
 
-# Emory says: "this svelte prompt is bottomless"
-PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %2~ %F{yellow}%#%b '
-
 # Decide if we need to set titlebar text.
     
     case $TERM in
@@ -333,7 +330,8 @@ function preexec() {
   title "$1" "$USER@%m" "%35<...<%~"
 }
 
-PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %2~ %F{yellow}%#%b '
+# Emory says: "this prompt wears no bottoms"
+PROMPT='%B·%b @%{%F{magenta}%}%m%b %B·%b %2~ %F{green}%#%b '
 
 # Watch for my friends
 # Set below

@@ -266,12 +266,14 @@ export MANPATH=/usr/man:/usr/share/man:/usr/local/share/man:/usr/local/man:/usr/
 fignore=(.o .c~ .old .pro)
 
 # Hosts to use for completion
-hosts=(`hostname` autobahn.hellyeah.com itsecurity12.its.uiowa.edu ids7 )
+hosts=(`hostname` autobahn sobchak itsecurity3 itsecurity12 shudder shake idsconsole itsec-mon ghetto )
 
 # Set prompts
 autoload promptinit
 promptinit
-#prompt bart
+
+# Emory says: "this svelte prompt is bottomless"
+PROMPT='%B·%b %F{magenta}%}%n%{%f%}@%{%F{green}%}%m%b %B·%b %F{red}%}%2~%b %B·%b '
 
 # Decide if we need to set titlebar text.
     
@@ -330,9 +332,6 @@ function precmd() {
 function preexec() {
   title "$1" "$USER@%m" "%35<...<%~"
 }
-
-
-# END WHUT prompt
 
 # Watch for my friends
 # Set below
@@ -566,7 +565,7 @@ bindkey ' ' magic-space  # also do history expansino on space
 #*--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--*#
 # Aliases                                                                   #
 #*--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--*#
-alias ls='ls -F'
+alias ls='ls -FG'
 alias mv='nocorrect mv -i'       # no spelling correction on mv
 alias cp='nocorrect cp -i'    # no spelling correction on cp
 alias mkdir='nocorrect mkdir' # no spelling correction on mkdir

@@ -87,6 +87,7 @@ elif [[ ${OS_TYPE} == "Linux" ]]; then
    psa  () { ps -aux | $PAGER }
    psag () { ps -aux | grep $* | grep -v grep }
    sys  () { $SYSLOG /var/adm/syslog }
+   alias ls='ls --color'
 
 elif [[ ${OS_TYPE} == "BSD/OS" ]]; then 
    # Proto bsdi Box
@@ -133,6 +134,7 @@ export LANG="en_US.UTF-8"
    psa  () { ps -aux | $PAGER }
    psag () { ps -aux | grep $* | grep -v grep }
    sys  () { $SYSLOG /var/log/system.log }
+   alias ls='ls -AG'
 
 
 elif [[ ${OS_TYPE} == "FreeBSD" ]]; then
@@ -332,7 +334,7 @@ function preexec() {
 
 autoload -U colors && colors  
 # Emory says: "this prompt wears no bottoms"
-PROMPT='%B·%b @%{%F{magenta}%}%m%b %B·%b %2~ %F{green}%#%b '
+PROMPT="%B·%b @%{$fg[magenta]%}%m %B·%b %{$fg[green]%}%~ %{$reset_color%}%% "
 
 # Watch for my friends
 # Set below
@@ -566,7 +568,6 @@ bindkey ' ' magic-space  # also do history expansino on space
 #*--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--*#
 # Aliases                                                                   #
 #*--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--*#
-alias ls='ls -FG'
 alias mv='nocorrect mv -i'       # no spelling correction on mv
 alias cp='nocorrect cp -i'    # no spelling correction on cp
 alias mkdir='nocorrect mkdir' # no spelling correction on mkdir

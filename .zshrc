@@ -134,7 +134,7 @@ export LANG="en_US.UTF-8"
    psa  () { ps -aux | $PAGER }
    psag () { ps -aux | grep $* | grep -v grep }
    sys  () { $SYSLOG /var/log/system.log }
-   alias ls='ls -AG'
+   alias ls='ls -G'
 
 
 elif [[ ${OS_TYPE} == "FreeBSD" ]]; then

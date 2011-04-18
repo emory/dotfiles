@@ -334,7 +334,7 @@ function preexec() {
 
 autoload -U colors && colors  
 # Emory says: "this prompt wears no bottoms"
-PROMPT="%B·%b @%{$fg[magenta]%}%m %B·%b %{$fg[green]%}%~ %{$reset_color%}%% "
+PROMPT="%B·%b @%{$fg[magenta]%}%m %{$reset_color%}% %B·%b %{$fg[green]%}%~ %{$reset_color%}%% "
 
 # Watch for my friends
 # Set below

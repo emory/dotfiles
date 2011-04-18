@@ -330,6 +330,7 @@ function preexec() {
   title "$1" "$USER@%m" "%35<...<%~"
 }
 
+autoload -U colors && colors  
 # Emory says: "this prompt wears no bottoms"
 PROMPT='%B·%b @%{%F{magenta}%}%m%b %B·%b %2~ %F{green}%#%b '
 

@@ -18,3 +18,9 @@ endif
 
 colorscheme herald
 filetype plugin indent on 
+set guifont=SGIScreen:h14
+
+
+" Insert timestamp with F3
+nmap <F3> a<C-R>=strftime("%Y%m%d %H:%M")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y%m%d %H:%M")<CR>
